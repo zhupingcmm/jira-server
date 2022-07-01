@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mf.jira.server.mapper.UserMapper">
+    <resultMap id="UserMap" type="com.mf.jira.server.model.User">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <select id="getAllUsers" resultMap="UserMap">
+        select * from `jira`.t_user
+    </select>
+
+    <insert id="addUser" parameterType="com.mf.jira.server.model.User">
+        insert into `jira`.t_user
+        (
+         name,
+         password,
+         email
+        )
+        values
+        (
+         #{name},
+         #{password},
+         #{email}
+        )
+    </insert>
+</mapper>
