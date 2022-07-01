@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mf.jira.server.mapper.ProjectMapper">
+    <resultMap id="ProjectMap" type="com.mf.jira.server.model.Project">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="person_id" jdbcType="BIGINT" property="personId"/>
+        <result column="organization" jdbcType="VARCHAR" property="organization"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <select id="getAllProjects" resultMap="ProjectMap">
+        select * from `jira`.t_project
+    </select>
+    <insert id="addProject" parameterType="com.mf.jira.server.model.Project">
+        insert into `jira`.t_project
+        (
+         name,
+         person_id,
+         organization
+         )
+        values
+        (
+         #{name},
+         #{personId},
+         #{organization}
+        )
+    </insert>
+</mapper>

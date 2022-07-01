@@ -23,3 +23,16 @@ create table `t_project` (
                               current_timestamp,
                           primary key pk_id(`id`)
 ) engine=innodb default charset=utf8mb4 collate=utf8mb4_unicode_ci;
+
+
+insert into `jira`.t_project
+(
+    name,
+    person_id,
+    organization
+)
+values
+(
+    "骑手管理",
+     #{organization}
+)
