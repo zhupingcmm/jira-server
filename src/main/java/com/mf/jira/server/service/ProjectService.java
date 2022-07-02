@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProjectService {
 
-    List<ProjectDTO> getAllProjects();
+    List<ProjectDTO> getAllProjects(String name, Long personId);
 
     void addProject(ProjectDTO projectDTO);
 }

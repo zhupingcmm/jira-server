@@ -4,10 +4,7 @@ import com.mf.jira.server.base.BaseResponse;
 import com.mf.jira.server.dto.ProjectDTO;
 import com.mf.jira.server.service.ProjectService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class ProjectController {
         return BaseResponse.success();
     }
     @GetMapping("/projects")
-    public BaseResponse<List<ProjectDTO>> getAllProjects(){
-        return BaseResponse.success(projectService.getAllProjects());
+    public BaseResponse<List<ProjectDTO>> getAllProjects(@RequestParam(required = false) Long personId, @RequestParam(required = false) String name){
+        return BaseResponse.success(projectService.getAllProjects(name, personId));
     }
 }

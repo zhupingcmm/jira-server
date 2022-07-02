@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +18,24 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectMapper projectMapper;
     @Override
-    public List<ProjectDTO> getAllProjects() {
+    public List<ProjectDTO> getAllProjects(String name, Long personId) {
         List<Project> projects = projectMapper.getAllProjects();
+        if (name != null || personId != null) {
+//            projects = projects.stream()
+//                    .filter(project -> project.getName().equals(name) || project.getPersonId().equals(personId))
+//                    .collect(Collectors.toList());
+            if (name != null) {
+                projects = projects.stream()
+                        .filter(project -> project.getName().equals(name))
+                        .collect(Collectors.toList());
+            }
+            if (personId != null) {
+                projects = projects.stream()
+                        .filter(project -> project.getPersonId().equals(personId))
+                        .collect(Collectors.toList());
+            }
+        }
+
         return ObjectTransformer.transform(projects, ProjectDTO.class);
     }
 
