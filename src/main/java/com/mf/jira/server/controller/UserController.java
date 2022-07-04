@@ -57,8 +57,10 @@ public class UserController {
 
        val result = userService.getUser(UserDTO.builder()
                        .name(name)
+                       .password(password)
                        .token(token)
                .build());
+       result.setPassword(null);
        return BaseResponse.success(result);
     }
 
