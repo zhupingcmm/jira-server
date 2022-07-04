@@ -12,6 +12,10 @@
     <select id="getAllUsers" resultMap="UserMap">
         select * from `jira`.t_user
     </select>
+    <select id="findUser" resultMap="UserMap" parameterType="java.lang.String">
+        select * from `jira`.t_user
+        where name = #{name}
+    </select>
 
     <insert id="addUser" parameterType="com.mf.jira.server.model.User">
         insert into `jira`.t_user

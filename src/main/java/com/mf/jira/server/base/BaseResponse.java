@@ -28,6 +28,11 @@ public class BaseResponse<T> extends BaseBean{
         return response;
     }
 
+    public static <T> BaseResponse<T> error(ResponseEnum responseEnum){
+        BaseResponse<T> response = new BaseResponse<>(responseEnum);
+        return response;
+    }
+
     public static <T> BaseResponse<T> success(){
         return new BaseResponse<>(ResponseEnum.SUCCESS);
     }

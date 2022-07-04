@@ -21,9 +21,6 @@ public class ProjectServiceImpl implements ProjectService {
     public List<ProjectDTO> getAllProjects(String name, Long personId) {
         List<Project> projects = projectMapper.getAllProjects();
         if (name != null || personId != null) {
-//            projects = projects.stream()
-//                    .filter(project -> project.getName().equals(name) || project.getPersonId().equals(personId))
-//                    .collect(Collectors.toList());
             if (name != null) {
                 projects = projects.stream()
                         .filter(project -> project.getName().equals(name))
