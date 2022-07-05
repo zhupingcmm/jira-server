@@ -16,6 +16,6 @@ public class AppConfig {
     public static class Jwt {
         private String jwtId = "jira-server";
         private String authorities = "authorities";
-        private Long tokenExpireTime = 60*1000L;
+        private Long tokenExpireTime = 30*60*1000L;
     }
 }

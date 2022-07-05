@@ -4,7 +4,6 @@ import com.mf.jira.server.base.ResponseEnum;
 import com.mf.jira.server.config.AppConfig;
 import com.mf.jira.server.exception.JiraException;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.lang.Maps;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.val;
@@ -13,7 +12,6 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class JwtUtil {
 

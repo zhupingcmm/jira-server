@@ -1,12 +1,10 @@
 package com.mf.jira.server.controller;
 
 import com.mf.jira.server.base.BaseResponse;
-import com.mf.jira.server.base.ResponseEnum;
 import com.mf.jira.server.config.AppConfig;
 import com.mf.jira.server.dto.UserDTO;
 import com.mf.jira.server.service.UserService;
 import com.mf.jira.server.util.JwtUtil;
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
