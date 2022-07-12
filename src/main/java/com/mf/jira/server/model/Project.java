@@ -14,6 +14,7 @@ import java.util.Date;
 public class Project {
     private Long id;
     private String name;
+    private Boolean pin;
     private Long personId;
     private String organization;
     private Date createTime;

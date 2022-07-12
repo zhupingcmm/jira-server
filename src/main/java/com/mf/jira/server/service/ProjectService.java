@@ -9,4 +9,6 @@ public interface ProjectService {
     List<ProjectDTO> getAllProjects(String name, Long personId);
 
     void addProject(ProjectDTO projectDTO);
+
+    ProjectDTO updateProject(Long id, ProjectDTO projectDTO);
 }

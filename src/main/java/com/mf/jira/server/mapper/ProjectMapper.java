@@ -10,4 +10,10 @@ public interface ProjectMapper {
     int addProject(Project project);
 
     List<Project> getAllProjects();
+
+    List<Project> getProject(Project project);
+
+    Project getProjectById(Long id);
+
+    int updateProjectPin(Project project);
 }

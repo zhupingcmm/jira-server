@@ -2,7 +2,7 @@ create table `t_user` (
     `id` bigint unsigned auto_increment,
     `name` varchar(100) not null unique,
     `password` varchar(100) not null,
-    `email` varchar(20) not null,
+    `email` varchar(20) not null unique,
     `create_time` datetime default current_timestamp,
     `update_time` datetime default current_timestamp on update
         current_timestamp,

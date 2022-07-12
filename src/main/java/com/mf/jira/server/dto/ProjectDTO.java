@@ -14,4 +14,5 @@ public class ProjectDTO {
     private String name;
     private Long personId;
     private String organization;
+    private Boolean pin;
 }

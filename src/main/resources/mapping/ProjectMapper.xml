@@ -8,10 +8,24 @@
         <result column="organization" jdbcType="VARCHAR" property="organization"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="pin" javaType="BOOLEAN" property="pin"/>
     </resultMap>
     <select id="getAllProjects" resultMap="ProjectMap">
         select * from `jira`.t_project
     </select>
+    <select id="getProject" resultMap="ProjectMap">
+        select * from `jira`.t_project
+        where name like '%#{name}%';
+    </select>
+    <select id="getProjectById" resultMap="ProjectMap">
+        select * from `jira`.t_project
+        where id = #{id}
+    </select>
+    <update id="updateProjectPin" parameterType="com.mf.jira.server.model.Project">
+        update `jira`.t_project
+        set pin = #{pin}
+        where id =#{id}
+    </update>
     <insert id="addProject" parameterType="com.mf.jira.server.model.Project">
         insert into `jira`.t_project
         (

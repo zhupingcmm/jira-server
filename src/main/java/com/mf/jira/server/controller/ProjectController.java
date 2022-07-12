@@ -22,4 +22,9 @@ public class ProjectController {
     public BaseResponse<List<ProjectDTO>> getAllProjects(@RequestParam(required = false) Long personId, @RequestParam(required = false) String name){
         return BaseResponse.success(projectService.getAllProjects(name, personId));
     }
+
+    @PatchMapping("/project/{id}")
+    public BaseResponse<ProjectDTO> updateProject(@PathVariable Long id, @RequestBody ProjectDTO projectDTO){
+        return BaseResponse.success(projectService.updateProject(id, projectDTO));
+    }
 }
