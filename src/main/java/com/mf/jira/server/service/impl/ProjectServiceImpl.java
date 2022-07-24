@@ -8,6 +8,7 @@ import com.mf.jira.server.service.ProjectService;
 import com.mf.jira.server.util.Assert;
 import com.mf.jira.server.util.ObjectTransformer;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

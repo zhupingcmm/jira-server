@@ -6,6 +6,22 @@ spring:
     url: jdbc:mysql://localhost:3306/jira?useInformationSchema=false&charset=utf8mb4&useSSL=false&allowMultiQueries=true&allowPublicKeyRetrieval=true
     username: root
     password: 1234
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 0
+    listener:
+#      ack-mode: record
+      type: batch
+    consumer:
+      isolation-level: read_committed
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-records: 50
+      enable-auto-commit: true
+      auto-offset-reset: latest
 server:
   port: 8090
 
