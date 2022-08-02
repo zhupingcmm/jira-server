@@ -26,6 +26,10 @@
         set pin = #{pin}
         where id =#{id}
     </update>
+    <delete id="deleteProjectById">
+        delete from `jira`.t_project
+        where id = #{id}
+    </delete>
     <insert id="addProject" parameterType="com.mf.jira.server.model.Project">
         insert into `jira`.t_project
         (

@@ -16,4 +16,6 @@ public interface ProjectMapper {
     Project getProjectById(Long id);
 
     int updateProjectPin(Project project);
+
+    void deleteProjectById(Long id);
 }

@@ -27,4 +27,15 @@ public class ProjectController {
     public BaseResponse<ProjectDTO> updateProject(@PathVariable Long id, @RequestBody ProjectDTO projectDTO){
         return BaseResponse.success(projectService.updateProject(id, projectDTO));
     }
+
+    @GetMapping("/project/{id}")
+    public BaseResponse<ProjectDTO> getProject(@PathVariable Long id){
+        return BaseResponse.success(projectService.getProjectById(id));
+    }
+
+    @DeleteMapping("/project/{id}")
+    public BaseResponse deleteProjectById(@PathVariable Long id) {
+        projectService.deleteProjectById(id);
+        return BaseResponse.success();
+    }
 }

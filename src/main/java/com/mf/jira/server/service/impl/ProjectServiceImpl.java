@@ -56,4 +56,17 @@ public class ProjectServiceImpl implements ProjectService {
         Assert.singleRowAffected(result);
         return ObjectTransformer.transform(project, ProjectDTO.class);
     }
+
+    @Override
+    public ProjectDTO getProjectById(Long id) {
+        Project project = projectMapper.getProjectById(id);
+        return ObjectTransformer.transform(project, ProjectDTO.class);
+    }
+
+    @Override
+    public void deleteProjectById(Long id) {
+        projectMapper.deleteProjectById(id);
+    }
+
+
 }
