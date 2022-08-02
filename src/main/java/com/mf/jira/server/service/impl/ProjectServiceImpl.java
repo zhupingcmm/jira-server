@@ -1,5 +1,8 @@
 package com.mf.jira.server.service.impl;
 
+import com.mf.jira.server.aspect.MyCacheEvict;
+import com.mf.jira.server.aspect.MyCachePut;
+import com.mf.jira.server.aspect.MyCacheable;
 import com.mf.jira.server.base.Constants;
 import com.mf.jira.server.dto.ProjectDTO;
 import com.mf.jira.server.exception.JiraException;
@@ -12,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    @CachePut(cacheNames = Constants.PROJECT_CACHE_KEY, key = "#id")
+    @MyCachePut(cacheNames = Constants.PROJECT_CACHE_KEY, key = "#id")
     public ProjectDTO updateProject(Long id, ProjectDTO projectDTO) {
         Project project = projectMapper.getProjectById(id);
         if (projectDTO.getPin() != null) {
@@ -63,14 +65,14 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    @Cacheable(cacheNames = Constants.PROJECT_CACHE_KEY, key = "#id")
+    @MyCacheable(cacheNames = Constants.PROJECT_CACHE_KEY, key = "#id")
     public ProjectDTO getProjectById(Long id) {
         Project project = projectMapper.getProjectById(id);
         return ObjectTransformer.transform(project, ProjectDTO.class);
     }
 
     @Override
-    @CacheEvict(cacheNames = Constants.PROJECT_CACHE_KEY, key = "#id")
+    @MyCacheEvict(cacheNames = Constants.PROJECT_CACHE_KEY, key = "#id")
     public void deleteProjectById(Long id) {
         projectMapper.deleteProjectById(id);
     }

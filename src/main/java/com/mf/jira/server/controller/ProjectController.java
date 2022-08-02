@@ -28,21 +28,16 @@ public class ProjectController {
 
     @PatchMapping("/project/{id}")
     public BaseResponse<ProjectDTO> updateProject(@PathVariable Long id, @RequestBody ProjectDTO projectDTO){
-        log.info("update project  info {}", projectDTO);
         return BaseResponse.success(projectService.updateProject(id, projectDTO), ResponseEnum.PROJECT_MODIFY_SUCCESS);
     }
 
     @GetMapping("/project/{id}")
     public BaseResponse<ProjectDTO> getProject(@PathVariable Long id){
-
-        ProjectDTO projectDTO = projectService.getProjectById(id);
-        log.info("get project info {}", projectDTO);
-        return BaseResponse.success(projectDTO);
+        return BaseResponse.success(projectService.getProjectById(id));
     }
 
     @DeleteMapping("/project/{id}")
     public BaseResponse deleteProjectById(@PathVariable Long id) {
-        log.info("delete project {}", id);
         projectService.deleteProjectById(id);
         return BaseResponse.success();
     }
