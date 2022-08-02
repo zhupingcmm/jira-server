@@ -11,6 +11,7 @@ import com.mf.jira.server.util.Assert;
 import com.mf.jira.server.util.ObjectTransformer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(cacheNames = "users", key = "")
     public List<UserDTO> getUsers() {
         List<User> users = userMapper.getAllUsers();
         return ObjectTransformer.transform(users, UserDTO.class);
@@ -53,7 +55,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.findUser(userDTO.getName());
         if (Objects.equals(user.getPassword(), userDTO.getPassword())) {
             return ObjectTransformer.transform(user,UserDTO.class);
-        };
+        }
         throw new JiraException(ResponseEnum.NAME_OR_PASSWORD_NOT_VALID);
     }
 }

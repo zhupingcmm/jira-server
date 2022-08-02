@@ -6,6 +6,7 @@ import com.mf.jira.server.dto.UserDTO;
 import com.mf.jira.server.service.UserService;
 import com.mf.jira.server.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +18,16 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
 
     private final AppConfig appConfig;
     @GetMapping("/users")
     public BaseResponse<List<UserDTO>> getUsers () {
-        return BaseResponse.success(userService.getUsers());
+        List<UserDTO> users = userService.getUsers();
+        log.info("Get all user info, {}", users);
+        return BaseResponse.success(users);
     }
 
     @PostMapping("/register")

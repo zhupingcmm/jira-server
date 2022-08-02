@@ -22,6 +22,16 @@ public class BaseResponse<T> extends BaseBean{
         return response;
     }
 
+    public static <T> BaseResponse<T> success(T data, ResponseEnum responseEnum) {
+        BaseResponse<T> response = new BaseResponse<>(responseEnum);
+        response.setData(data);
+        return response;
+    }
+
+    public static <T> BaseResponse<T> success(){
+        return new BaseResponse<>(ResponseEnum.SUCCESS);
+    }
+
     public static <T> BaseResponse<T> error(T data) {
         BaseResponse<T> response = new BaseResponse<>(ResponseEnum.ERROR);
         response.setData(data);
@@ -39,9 +49,7 @@ public class BaseResponse<T> extends BaseBean{
        return baseResponse;
     }
 
-    public static <T> BaseResponse<T> success(){
-        return new BaseResponse<>(ResponseEnum.SUCCESS);
-    }
+
 
 
 }

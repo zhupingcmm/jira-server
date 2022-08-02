@@ -1,15 +1,18 @@
 package com.mf.jira.server.controller;
 
 import com.mf.jira.server.base.BaseResponse;
+import com.mf.jira.server.base.ResponseEnum;
 import com.mf.jira.server.dto.ProjectDTO;
 import com.mf.jira.server.service.ProjectService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class ProjectController {
 
     private final ProjectService projectService;
@@ -25,16 +28,21 @@ public class ProjectController {
 
     @PatchMapping("/project/{id}")
     public BaseResponse<ProjectDTO> updateProject(@PathVariable Long id, @RequestBody ProjectDTO projectDTO){
-        return BaseResponse.success(projectService.updateProject(id, projectDTO));
+        log.info("update project  info {}", projectDTO);
+        return BaseResponse.success(projectService.updateProject(id, projectDTO), ResponseEnum.PROJECT_MODIFY_SUCCESS);
     }
 
     @GetMapping("/project/{id}")
     public BaseResponse<ProjectDTO> getProject(@PathVariable Long id){
-        return BaseResponse.success(projectService.getProjectById(id));
+
+        ProjectDTO projectDTO = projectService.getProjectById(id);
+        log.info("get project info {}", projectDTO);
+        return BaseResponse.success(projectDTO);
     }
 
     @DeleteMapping("/project/{id}")
     public BaseResponse deleteProjectById(@PathVariable Long id) {
+        log.info("delete project {}", id);
         projectService.deleteProjectById(id);
         return BaseResponse.success();
     }
