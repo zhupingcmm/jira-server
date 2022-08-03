@@ -12,9 +12,6 @@ import com.mf.jira.server.service.ProjectService;
 import com.mf.jira.server.util.Assert;
 import com.mf.jira.server.util.ObjectTransformer;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,7 +62,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    @MyCacheable(cacheNames = Constants.PROJECT_CACHE_KEY, key = "#id")
+    @MyCacheable(cacheNames = Constants.PROJECT_CACHE_KEY, key = "#id", waitInSeconds = 1)
     public ProjectDTO getProjectById(Long id) {
         Project project = projectMapper.getProjectById(id);
         return ObjectTransformer.transform(project, ProjectDTO.class);

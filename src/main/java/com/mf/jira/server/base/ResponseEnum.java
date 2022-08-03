@@ -15,9 +15,11 @@ public enum ResponseEnum {
     NAME_OR_PASSWORD_NOT_VALID(1006, "用户名或者密码不对"),
     ERROR(1007, "系统错误"),
 
+
     PROJECT_MODIFY_SUCCESS(1008, "Project 修改成功"),
 
-    PROJECT_DELETE_SUCCESS(1009, "Project 删除成功");
+    PROJECT_DELETE_SUCCESS(1009, "Project 删除成功"),
+    SYSTEM_BUSY(1010, "系统繁忙");
     @Getter
     private int code;
     @Getter

@@ -31,3 +31,7 @@ server:
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
   type-aliases-package: com.mf.jira.server.model
+mycacheable:
+  rate:
+    limit:
+      map: { getProjectById: 0.1 }
