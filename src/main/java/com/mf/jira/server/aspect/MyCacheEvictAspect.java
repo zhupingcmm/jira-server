@@ -27,7 +27,6 @@ public class MyCacheEvictAspect {
 
         Object cacheValue = null;
         if (beforeInvocation) {
-
             deleteCache(allEntries, cacheKey);
             cacheValue = joinPoint.proceed();
         } else {
