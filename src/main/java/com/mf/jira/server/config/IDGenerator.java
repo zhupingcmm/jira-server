@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class IDGenerator {
     private final RedisTemplate<String, Object> restTemplate;
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyMMddHHmmssSSS");
-    public Long incr (IDTypeEnum idTypeEnum) {
+    public Long getId (IDTypeEnum idTypeEnum) {
         LocalDateTime now = LocalDateTime.now();
         String dataTime = dateTimeFormatter.format(now);
         long value = restTemplate.opsForValue().increment(idTypeEnum.getRedisCounter(), 1);

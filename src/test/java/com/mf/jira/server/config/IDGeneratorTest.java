@@ -20,7 +20,7 @@ public class IDGeneratorTest {
     @Test
     public void testSyncIdGenerator () {
         for (int i = 0; i < 100 ; i++) {
-            long id = idGenerator.incr(IDTypeEnum.JIRA);
+            long id = idGenerator.getId(IDTypeEnum.JIRA);
             System.out.println(id);
         }
     }
@@ -33,7 +33,7 @@ public class IDGeneratorTest {
             new Thread(() -> {
                 try {
                     countDownLatch.await();
-                    long id = idGenerator.incr(IDTypeEnum.JIRA);
+                    long id = idGenerator.getId(IDTypeEnum.JIRA);
                     System.out.println(id);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

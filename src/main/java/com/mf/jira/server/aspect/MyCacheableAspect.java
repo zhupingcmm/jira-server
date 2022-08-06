@@ -1,6 +1,5 @@
 package com.mf.jira.server.aspect;
 
-import com.google.common.hash.BloomFilter;
 import com.google.common.util.concurrent.RateLimiter;
 import com.mf.jira.server.base.ResponseEnum;
 import com.mf.jira.server.exception.JiraException;
@@ -12,6 +11,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 @ConfigurationProperties(prefix = "mycacheable.rate.limit")
+@Cacheable
 public class MyCacheableAspect {
 
     private final RedisTemplate<String, Object> redisTemplate;
@@ -40,15 +41,16 @@ public class MyCacheableAspect {
                 rateLimiters.put(methodName, RateLimiter.create(permits));
             });
         }
-
     }
 
     @Around("@annotation(myCacheable)")
     public Object doAround(ProceedingJoinPoint joinPoint, MyCacheable myCacheable) throws Throwable {
 
-        //限流
+        //限流 防止缓存雪崩
         this.rateLimit(joinPoint, myCacheable);
+        //todo 布隆过滤器 防止缓存穿透
 
+        //操作缓存
         String cacheKey = CacheUtil.getCacheKey(myCacheable.cacheNames(), myCacheable.key(), joinPoint);
         Object cacheValue = redisTemplate.opsForValue().get(cacheKey);
         if (cacheValue != null) {
