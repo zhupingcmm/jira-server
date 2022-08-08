@@ -1,5 +1,6 @@
 package com.mf.jira.server.util;
 
+import com.mf.jira.server.base.Constants;
 import com.mf.jira.server.base.ResponseEnum;
 import com.mf.jira.server.config.AppConfig;
 import com.mf.jira.server.exception.JiraException;
@@ -19,8 +20,8 @@ public class JwtUtil {
 
     public static String createToken(AppConfig appConfig, String userName, String password) {
         Map <String, Object> map = new HashMap<>();
-        map.put("username",userName);
-        map.put("password", password);
+        map.put(Constants.USERNAME,userName);
+        map.put(Constants.PASSWORD, password);
         return Jwts.builder()
                 .setId(appConfig.getJwt().getJwtId())
                 .setSubject(userName)

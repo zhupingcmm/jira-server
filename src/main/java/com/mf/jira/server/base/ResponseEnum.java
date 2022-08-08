@@ -19,7 +19,8 @@ public enum ResponseEnum {
     PROJECT_MODIFY_SUCCESS(1008, "Project 修改成功"),
 
     PROJECT_DELETE_SUCCESS(1009, "Project 删除成功"),
-    SYSTEM_BUSY(1010, "系统繁忙");
+    SYSTEM_BUSY(1010, "系统繁忙"),
+    TOKEN_INVALID(1011, "无效 token");
     @Getter
     private int code;
     @Getter
