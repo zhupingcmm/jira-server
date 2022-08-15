@@ -40,6 +40,7 @@ public class ZkLock implements Lock {
                         countDownLatch.countDown();
                     }
                 };
+                zkClient.createEphemeralSequential("/a","a");
                 //监听 zk lockPath 的变化
                 zkClient.subscribeDataChanges(lockPath, dataListener);
                 //hang 住直到 监听到 lockPath被删除
