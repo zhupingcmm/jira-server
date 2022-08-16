@@ -34,7 +34,7 @@ public class ZkIdGenerator {
 
         String dataTime = dateTimeFormatter.format(now);
 
-        String value = zkClient.createEphemeralSequential(ID_PATH + "/", Thread.currentThread().getName());
+        String value = zkClient.createPersistentSequential(ID_PATH + "/", Thread.currentThread().getName());
         long id = Long.parseLong(value.substring(ID_PATH.length() + 1));
         if (id >= 1000) {
             id = id % 1000;
